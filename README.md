@@ -94,6 +94,13 @@ We use a AWS RDS to this case, we using postgresql and adminer to managmente dat
 
 You can access to `adminer` [here](http://localhost:8080/)
 
+### Minio as S3
+
+We use Minio as AWS S3 Bucket, you can access to Minio console and created a new **private** bucket [here](http://localhost:9001/login), the default credentials are:
+
+User: default_access_key
+Password: default_secret_key
+
 ## Author
 
 👤 **Umvel Inc**

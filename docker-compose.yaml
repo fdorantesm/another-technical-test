@@ -2,11 +2,37 @@ version: '3.8'
 
 volumes:
   database-data:
+  s3data1-1:
+  s3data1-2:
 
 
 networks:
   net-serverless:
 
+
+x-minio-common:
+  &minio-common
+  image: quay.io/minio/minio:RELEASE.2022-08-02T23-59-16Z
+  command: server --console-address ":9001" http://s3/data{1...2}
+  expose:
+    - "9000"
+    - "9001"
+  environment:
+    MINIO_ROOT_USER: ${AWS_ACCESS_KEY_ID}
+    MINIO_ROOT_PASSWORD: ${AWS_SECRET_ACCESS_KEY}
+    MINIO_SERVER_URL: http://localhost:9000
+    MINIO_REGION: ${AWS_REGION}
+  healthcheck:
+    test:
+      [
+        "CMD",
+        "curl",
+        "-f",
+        "http://localhost:9000/minio/health/live"
+      ]
+    interval: 30s
+    timeout: 20s
+    retries: 3
 
 services:
   database:
@@ -21,7 +47,8 @@ services:
     volumes:
       - database-data:/var/lib/postgresql/data
     networks:
-      - net-serverless
+      net-serverless:
+
 
   adminer:
     image: adminer
@@ -32,4 +59,28 @@ services:
     environment:
       - ADMINER_DEFAULT_SERVER=database
     networks:
-      - net-serverless
+      net-serverless:
+
+
+  s3:
+    <<: *minio-common
+    hostname: s3
+    volumes:
+      - s3data1-1:/data1
+      - s3data1-2:/data2
+    networks:
+      net-serverless:
+
+
+  nginx:
+    image: nginx:1.19.2-alpine
+    hostname: nginx
+    volumes:
+      - ./docker/nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    depends_on:
+      - s3
+    networks:
+      net-serverless:
