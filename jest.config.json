@@ -1,0 +1,73 @@
+{
+  "verbose": true,
+  "moduleFileExtensions": ["ts", "js", "json"],
+  "rootDir": "./",
+  "collectCoverageFrom": ["<rootDir>/apps/**/*.ts", "<rootDir>/libs/**/*.ts"],
+  "coverageDirectory": "./coverage",
+  "testEnvironment": "node",
+  "detectOpenHandles": false,
+  "modulePathIgnorePatterns": [
+    "<rootDir>/dist/",
+    "<rootDir>/(.*)/coverage/",
+    "<rootDir>/node_modules/"
+  ],
+  "testPathIgnorePatterns": [
+    "<rootDir>/.git/",
+    "<rootDir>/dist/",
+    "<rootDir>/.husky/",
+    "<rootDir>/.serverless/",
+    "<rootDir>/.vscode/",
+    "<rootDir>/(.*)/coverage/",
+    "<rootDir>/devtools/",
+    "<rootDir>/node_modules/",
+    "<rootDir>/.env.example",
+    "<rootDir>/(.*).env",
+    "<rootDir>/.eslintignore",
+    "<rootDir>/.eslintrc.json",
+    "<rootDir>/.gitignore",
+    "<rootDir>/.prettierrc.json",
+    "<rootDir>/.release-it.json",
+    "<rootDir>/commitlint-config.js",
+    "<rootDir>/dotenv.config.ts",
+    "<rootDir>/jest.config.json",
+    "<rootDir>/README",
+    "<rootDir>/tsconfig.json",
+    "<rootDir>/tsconfig.build.json"
+  ],
+  "watchPathIgnorePatterns": ["<rootDir>/node_modules/"],
+  "transformIgnorePatterns": ["<rootDir>/node_modules/"],
+  "moduleNameMapper": {
+    "^@app/commons(|/.*)$": "<rootDir>/libs/commons/src/$1"
+  },
+  "coveragePathIgnorePatterns": [
+    "<rootDir>/.git/",
+    "<rootDir>/.build/",
+    "<rootDir>/.husky/",
+    "<rootDir>/.serverless/",
+    "<rootDir>/.vscode/",
+    "<rootDir>/(.*)/coverage/",
+    "<rootDir>/devtools/",
+    "<rootDir>/node_modules/",
+    "<rootDir>/.env.example",
+    "<rootDir>/(.*).env",
+    "<rootDir>/.eslintignore",
+    "<rootDir>/.eslintrc.json",
+    "<rootDir>/.gitignore",
+    "<rootDir>/.prettierrc.json",
+    "<rootDir>/.release-it.json",
+    "<rootDir>/commitlint-config.js",
+    "<rootDir>/dotenv.config.ts",
+    "<rootDir>/jest.config.json",
+    "<rootDir>/README",
+    "<rootDir>/tsconfig.json",
+    "<rootDir>/tsconfig.build.json",
+    "<rootDir>/(.*)/test/"
+  ],
+  "transform": {
+    "^.+\\.(t|j)s$": "ts-jest"
+  },
+  "clearMocks": true,
+  "testMatch": ["**/test/*.spec.ts"],
+  "coverageProvider": "v8",
+  "setupFiles": ["<rootDir>/scripts/jest/dotenv.config.ts"]
+}

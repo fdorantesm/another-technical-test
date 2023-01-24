@@ -1,0 +1,6 @@
+{
+  "extends": [
+    "./node_modules/@umvel/javascript-base-guidelines/.eslintrc.json",
+    "./node_modules/@umvel/typescript-base-guidelines/eslintrc.umvel.json"
+  ]
+}
