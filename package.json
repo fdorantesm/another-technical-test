@@ -28,7 +28,7 @@
     "typeorm:create-migration": "npm run typeorm -- migration:create",
     "typeorm:run-migration": "npm run typeorm -- -d ./scripts/data-source.ts migration:run --transaction each",
     "typeorm-extension": "ts-node --project tsconfig.json -r tsconfig-paths/register ./node_modules/typeorm-extension/dist/cli/index.js",
-    "run-seed": "npm run typeorm-extension seed -- -r scripts --seed",
+    "run-seed": "npm run typeorm-extension seed -- -r scripts",
     "typeorm:drop-schema": "npm run typeorm -- -d ./scripts/data-source.ts schema:drop",
     "typeorm:revert-migration": "npm run typeorm -- -d ./scripts/data-source.ts migration:revert"
   },
