@@ -22,7 +22,7 @@ const options = {
   cli: {
     migrationsDir: `${relative}/database/migrations`,
   },
-  entities: [`${relative}/src/**/*.entity.ts`],
+  entities: [`${relative}/**/*.entity{.ts,.js}`],
   migrations: [`${relative}/database/migrations/*.ts`],
   seeds: [`${relative}/database/seeds/**/*{.ts,.js}`],
   factories: [`${relative}/database/factories/**/*{.ts,.js}`],
