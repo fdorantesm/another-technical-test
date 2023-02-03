@@ -8,11 +8,13 @@ import { UserMetaDataEntity } from 'apps/users/src/infrastructure/domain/user-me
 import { UserMetaData } from 'apps/users/src/domain/user-metadata';
 
 export default class UserSeeder implements Seeder {
+  private rows = 10000;
+
   public async run(dataSource: DataSource): Promise<void> {
     const userRepository = dataSource.getRepository(UserEntity);
     const userMetaDataRepository = dataSource.getRepository(UserMetaDataEntity);
 
-    const users = Array.from(Array(100).keys()).map(() => {
+    const users = Array.from(Array(this.rows).keys()).map(() => {
       const firstName = faker.name.firstName();
       const lastName = faker.name.lastName();
       const image = faker.internet.avatar();
