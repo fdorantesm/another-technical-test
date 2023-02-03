@@ -6,6 +6,7 @@ import * as faker from 'faker';
 import { User } from 'apps/users/src/domain/user';
 import { UserMetaDataEntity } from 'apps/users/src/infrastructure/domain/user-metadata.entity';
 import { UserMetaData } from 'apps/users/src/domain/user-metadata';
+import { randomString } from 'utility';
 
 export default class UserSeeder implements Seeder {
   private rows = 10000;
@@ -22,6 +23,7 @@ export default class UserSeeder implements Seeder {
       return {
         name: `${firstName} ${lastName}`,
         email: faker.internet.email(firstName, lastName).toLowerCase(),
+        code: randomString(6, '0123456789abcdef'),
         metadata: {
           image,
           birthday,
@@ -33,7 +35,11 @@ export default class UserSeeder implements Seeder {
       await PromisePool.withConcurrency(10)
         .for(users)
         .process(async (person) => {
-          const user = new User({ name: person.name, email: person.email });
+          const user = new User({
+            name: person.name,
+            email: person.email,
+            code: person.code,
+          });
           const {
             raw: [result],
           } = await userRepository.insert(user.entityRoot());
