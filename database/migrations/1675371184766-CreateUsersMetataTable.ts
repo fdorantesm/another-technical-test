@@ -17,10 +17,16 @@ export class CreateUsersMetataTable1675371184766 implements MigrationInterface {
             FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
         ) WITH (oids = false);`,
     );
+    await queryRunner.query(`
+        ALTER TABLE users DROP COLUMN bio;
+    `);
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query('DROP SEQUENCE IF EXISTS users_metadata_id_seq;');
     await queryRunner.query('DROP TABLE "users_metadata"');
+    await queryRunner.query(
+      'ALTER TABLE users ADD COLUMN bio character varying(1200);',
+    );
   }
 }
