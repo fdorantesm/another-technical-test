@@ -1,5 +1,6 @@
 import { IApplicationService } from '@app/commons/application/contracts/application-service';
 import { Inject, Injectable } from '@nestjs/common';
+import { IUserRepository } from '../../domain/contracts/user.repository';
 import { IUserSchema, User } from '../../domain/user';
 import { UserRepository } from '../../infrastructure/repositories/user.repository';
 import { USER_REPOSITORY } from '../constants/injection-tokens';
@@ -10,7 +11,7 @@ export class CreateUserService
   implements IApplicationService<CreateUserCommand>
 {
   constructor(
-    @Inject(USER_REPOSITORY) private userRespository: UserRepository,
+    @Inject(USER_REPOSITORY) private userRespository: IUserRepository,
   ) {}
 
   async process({

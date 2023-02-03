@@ -10,7 +10,7 @@ export class ListUsersWithMetadataCommand implements Command {
 
   @IsString({ each: true })
   @IsArray()
-  relations: string[];
+  relations?: string[];
 
   constructor(props: Partial<ListUsersWithMetadataCommand>) {
     Object.assign(this, props);

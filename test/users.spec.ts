@@ -15,5 +15,6 @@ describe('UsersController', () => {
     await app.init();
   });
 
-  it('/ (GET)', () => request(app.getHttpServer()).get('/').expect(200));
+  it('/users (GET)', () =>
+    request(app.getHttpServer()).get('/users').expect(200));
 });

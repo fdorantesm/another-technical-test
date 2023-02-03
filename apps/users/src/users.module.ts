@@ -4,6 +4,9 @@ import { options } from '@app/config/options/config.options';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import {
+  CREATE_USER_SERVICE,
+  LIST_USERS_SERVICE,
+  LIST_USERS_WITH_METADATA_SERVICE,
   S3_SERVICE,
   USER_METADATA_REPOSITORY,
   USER_REPOSITORY,
@@ -29,11 +32,17 @@ import { S3Service } from './infrastructure/services/s3.service';
   ],
   controllers: [UserController, UsersController],
   providers: [
-    CreateUserService,
-    ListUsersService,
-    ListUsersWithMetadataService,
     GetUserService,
     DeleteUserService,
+    { provide: LIST_USERS_SERVICE, useClass: ListUsersService },
+    {
+      provide: CREATE_USER_SERVICE,
+      useClass: CreateUserService,
+    },
+    {
+      provide: LIST_USERS_WITH_METADATA_SERVICE,
+      useClass: ListUsersWithMetadataService,
+    },
     {
       provide: USER_REPOSITORY,
       useClass: UserRepository,
