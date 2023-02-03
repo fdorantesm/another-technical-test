@@ -1,8 +1,15 @@
 {
   "verbose": true,
-  "moduleFileExtensions": ["ts", "js", "json"],
+  "moduleFileExtensions": [
+    "ts",
+    "js",
+    "json"
+  ],
   "rootDir": "./",
-  "collectCoverageFrom": ["<rootDir>/apps/**/*.ts", "<rootDir>/libs/**/*.ts"],
+  "collectCoverageFrom": [
+    "<rootDir>/apps/**/*.ts",
+    "<rootDir>/libs/**/*.ts"
+  ],
   "coverageDirectory": "./coverage",
   "testEnvironment": "node",
   "detectOpenHandles": false,
@@ -34,8 +41,12 @@
     "<rootDir>/tsconfig.json",
     "<rootDir>/tsconfig.build.json"
   ],
-  "watchPathIgnorePatterns": ["<rootDir>/node_modules/"],
-  "transformIgnorePatterns": ["<rootDir>/node_modules/"],
+  "watchPathIgnorePatterns": [
+    "<rootDir>/node_modules/"
+  ],
+  "transformIgnorePatterns": [
+    "<rootDir>/node_modules/"
+  ],
   "moduleNameMapper": {
     "^@app/commons(|/.*)$": "<rootDir>/libs/commons/src/$1"
   },
@@ -67,7 +78,11 @@
     "^.+\\.(t|j)s$": "ts-jest"
   },
   "clearMocks": true,
-  "testMatch": ["**/test/*.spec.ts"],
+  "testMatch": [
+    "**/*.spec.ts"
+  ],
   "coverageProvider": "v8",
-  "setupFiles": ["<rootDir>/scripts/jest/dotenv.config.ts"]
+  "setupFiles": [
+    "<rootDir>/scripts/jest/dotenv.config.ts"
+  ]
 }
