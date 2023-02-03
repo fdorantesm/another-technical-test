@@ -20,6 +20,6 @@ export class CreateUsersTable1674522701436 implements MigrationInterface {
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query('DROP SEQUENCE IF EXISTS users_id_seq;');
-    await queryRunner.query('DROP TABLE "users"');
+    await queryRunner.query('DROP TABLE "users" CASCADE');
   }
 }

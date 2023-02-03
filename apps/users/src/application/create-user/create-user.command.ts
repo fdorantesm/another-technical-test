@@ -18,11 +18,6 @@ export class CreateUserCommand implements Command {
   @IsNotEmpty()
   email: string;
 
-  @IsString()
-  @IsOptional()
-  @MaxLength(1200)
-  bio: string;
-
   constructor(props: Partial<CreateUserCommand>) {
     Object.assign(this, props);
   }
