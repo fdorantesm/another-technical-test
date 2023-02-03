@@ -1,9 +1,11 @@
 import { Command } from '@app/commons/application/contracts/command';
-import { IsObject } from 'class-validator';
+import { IsNumber, IsObject } from 'class-validator';
 
 export class ListUsersCommand implements Command {
-  @IsObject()
+  @IsNumber()
   skip: number;
+
+  @IsNumber()
   limit: number;
 
   constructor(props: Partial<ListUsersCommand>) {

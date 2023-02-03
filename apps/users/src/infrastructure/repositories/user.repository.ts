@@ -21,7 +21,24 @@ export class UserRepository implements IUserRepository {
   }
 
   async list(skip: number, limit: number): Promise<User[]> {
-    const result = await this.userRepository.find({ skip, take: limit });
+    const result = await this.userRepository.find({
+      skip,
+      take: limit,
+    });
+    const users = result.map((user) => new User(user));
+    return users;
+  }
+
+  async listWithRelations(
+    skip: number,
+    limit: number,
+    relations: string[],
+  ): Promise<User[]> {
+    const result = await this.userRepository.find({
+      skip,
+      relations,
+      take: limit,
+    });
     const users = result.map((user) => new User(user));
     return users;
   }

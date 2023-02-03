@@ -4,6 +4,7 @@ import { ExecutionContext, createParamDecorator } from '@nestjs/common';
 export type ParsedQueryOptions = {
   skip: number;
   limit: number;
+  with: string[];
 };
 
 export type ParsedQuery = {
@@ -22,6 +23,7 @@ export const QueryParser = createParamDecorator(
     queryObject.options = {
       limit,
       skip: (Number(query.page || query.page || 1) - 1) * limit,
+      with: query?.with?.split(',') || '',
     };
 
     const { options } = queryObject;

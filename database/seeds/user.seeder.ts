@@ -5,7 +5,10 @@ import { Seeder } from 'typeorm-extension';
 import * as faker from 'faker';
 import { User } from 'apps/users/src/domain/user';
 import { UserMetaDataEntity } from 'apps/users/src/infrastructure/domain/user-metadata.entity';
-import { UserMetaData } from 'apps/users/src/domain/user-metadata';
+import {
+  IUserMetadataDataSchema,
+  UserMetaData,
+} from 'apps/users/src/domain/user-metadata';
 import { randomString } from 'utility';
 
 export default class UserSeeder implements Seeder {
@@ -35,23 +38,28 @@ export default class UserSeeder implements Seeder {
       await PromisePool.withConcurrency(10)
         .for(users)
         .process(async (person) => {
-          const user = new User({
-            name: person.name,
-            email: person.email,
-            code: person.code,
-          });
-          const {
-            raw: [result],
-          } = await userRepository.insert(user.entityRoot());
-          const userMetaData = new UserMetaData({
-            image: person.metadata.image,
-            birthday: person.metadata.birthday,
-            userId: result.id,
-          });
-          await userMetaDataRepository.insert(userMetaData.entityRoot());
+          try {
+            const userMetaData = new UserMetaData({
+              image: person.metadata.image,
+              birthday: person.metadata.birthday,
+            });
+
+            const {
+              raw: [userMetadataResult],
+            } = await userMetaDataRepository.insert(userMetaData.entityRoot());
+
+            const user = new User({
+              name: person.name,
+              email: person.email,
+              code: person.code,
+              metadata_id: userMetadataResult.id,
+            });
+
+            await userRepository.insert(user.entityRoot());
+          } catch (error) {
+            console.error('UserSeeder Error', error);
+          }
         });
-    } catch (error) {
-      console.error('UserSeeder Error', error);
-    }
+    } catch (error) {}
   }
 }

@@ -24,12 +24,4 @@ export class UserMetaDataEntity
     nullable: true,
   })
   image: string;
-
-  @Column({
-    unique: true,
-    name: 'user_id',
-    type: 'integer',
-    nullable: false,
-  })
-  userId: number;
 }

@@ -17,6 +17,7 @@ import { UserEntity } from './infrastructure/domain/user.entity';
 import { UserRepository } from './infrastructure/repositories/user.repository';
 import { UserMetaDataRepository } from './infrastructure/repositories/user-metadata.repository';
 import { UserMetaDataEntity } from './infrastructure/domain/user-metadata.entity';
+import { ListUsersWithMetadataService } from './application/list-users-with-metadata/list-users-with-metadata.service';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { UserMetaDataEntity } from './infrastructure/domain/user-metadata.entity
   providers: [
     CreateUserService,
     ListUsersService,
+    ListUsersWithMetadataService,
     GetUserService,
     DeleteUserService,
     {

@@ -1,6 +1,13 @@
 import { BaseEntity } from '@app/commons/infrastructure/domain/base.entity';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { IUserSchema } from '../../domain/user';
+import { UserMetaDataEntity } from './user-metadata.entity';
 
 @Entity({ name: 'users' })
 export class UserEntity extends BaseEntity implements IUserSchema {
@@ -31,4 +38,16 @@ export class UserEntity extends BaseEntity implements IUserSchema {
     unique: true,
   })
   code?: string;
+
+  @Column({
+    name: 'metadata_id',
+    type: 'integer',
+    nullable: false,
+    unique: true,
+  })
+  metadata_id: number;
+
+  @OneToOne(() => UserMetaDataEntity)
+  @JoinColumn({ referencedColumnName: 'id', name: 'metadata_id' })
+  metadata: UserMetaDataEntity;
 }

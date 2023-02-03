@@ -13,19 +13,24 @@ import {
   ParsedQueryOptions,
   QueryParser,
 } from '@app/commons/infrastructure/decorators/query-params.decorator';
+import { ListUsersWithMetadataService } from '../../application/list-users-with-metadata/list-users-with-metadata.service';
 
 @Controller('users')
 export class UsersController {
   constructor(
     private readonly createUserService: CreateUserService,
-    private readonly listUsersService: ListUsersService,
+    private readonly listUsersWithMetadataService: ListUsersWithMetadataService,
   ) {}
 
   @Get('/')
   async list(
     @QueryParser('options') options: ParsedQueryOptions,
   ): Promise<IUserSchema[] | any> {
-    return this.listUsersService.process(options);
+    return this.listUsersWithMetadataService.process({
+      limit: options.limit,
+      relations: options.with,
+      skip: options.skip,
+    });
   }
 
   @Post()
