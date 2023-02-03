@@ -4,6 +4,7 @@ import { options } from '@app/config/options/config.options';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import {
+  S3_SERVICE,
   USER_METADATA_REPOSITORY,
   USER_REPOSITORY,
 } from './application/constants/injection-tokens';
@@ -18,6 +19,7 @@ import { UserRepository } from './infrastructure/repositories/user.repository';
 import { UserMetaDataRepository } from './infrastructure/repositories/user-metadata.repository';
 import { UserMetaDataEntity } from './infrastructure/domain/user-metadata.entity';
 import { ListUsersWithMetadataService } from './application/list-users-with-metadata/list-users-with-metadata.service';
+import { S3Service } from './infrastructure/services/s3.service';
 
 @Module({
   imports: [
@@ -39,6 +41,10 @@ import { ListUsersWithMetadataService } from './application/list-users-with-meta
     {
       provide: USER_METADATA_REPOSITORY,
       useClass: UserMetaDataRepository,
+    },
+    {
+      provide: S3_SERVICE,
+      useClass: S3Service,
     },
   ],
   exports: [USER_REPOSITORY, USER_METADATA_REPOSITORY],

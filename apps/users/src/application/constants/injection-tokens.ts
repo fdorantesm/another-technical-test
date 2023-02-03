@@ -1,2 +1,3 @@
 export const USER_REPOSITORY = Symbol('USER_REPOSITORY');
 export const USER_METADATA_REPOSITORY = Symbol('USER_METADATA_REPOSITORY');
+export const S3_SERVICE = Symbol('S3_SERVICE');

@@ -1,6 +1,7 @@
 import { DatabaseConfigType } from '@app/config/types/database.type';
 import { EnvironmentEnum } from '../types/environment.type';
 import { ServerConfigType } from '../types/server.type';
+import { S3ConfigType } from '../types/s3.type';
 
 export const ConfigLoader = (): ConfigLoader => ({
   server: {
@@ -22,9 +23,16 @@ export const ConfigLoader = (): ConfigLoader => ({
         ? { rejectUnauthorized: false }
         : false,
   },
+  s3: {
+    region: process.env.AWS_REGION,
+    accessKey: process.env.AWS_ACCESS_KEY_ID,
+    secretKey: process.env.AWS_SECRET_ACCESS_KEY,
+    endpoint: process.env.AWS_ENDPOINT,
+  },
 });
 
 type ConfigLoader = {
   server: ServerConfigType;
   database: DatabaseConfigType;
+  s3: S3ConfigType;
 };
