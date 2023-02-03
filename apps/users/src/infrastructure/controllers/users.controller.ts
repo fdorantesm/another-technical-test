@@ -9,6 +9,10 @@ import { CreateUserCommand } from '../../application/create-user/create-user.com
 import { CreateUserService } from '../../application/create-user/create-user.service';
 import { ListUsersService } from '../../application/list-users/list-users.service';
 import { IUserSchema } from '../../domain/user';
+import {
+  ParsedQueryOptions,
+  QueryParser,
+} from '@app/commons/infrastructure/decorators/query-params.decorator';
 
 @Controller('users')
 export class UsersController {
@@ -18,8 +22,10 @@ export class UsersController {
   ) {}
 
   @Get('/')
-  async list(): Promise<IUserSchema[]> {
-    return this.listUsersService.process();
+  async list(
+    @QueryParser('options') options: ParsedQueryOptions,
+  ): Promise<IUserSchema[] | any> {
+    return this.listUsersService.process(options);
   }
 
   @Post()

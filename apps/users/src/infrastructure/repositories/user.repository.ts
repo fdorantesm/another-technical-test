@@ -20,11 +20,9 @@ export class UserRepository implements IUserRepository {
     await this.userRepository.save(entity.entityRoot());
   }
 
-  async list(): Promise<User[]> {
-    const result = await this.createBuilder().getMany();
-
+  async list(skip: number, limit: number): Promise<User[]> {
+    const result = await this.userRepository.find({ skip, take: limit });
     const users = result.map((user) => new User(user));
-
     return users;
   }
 
