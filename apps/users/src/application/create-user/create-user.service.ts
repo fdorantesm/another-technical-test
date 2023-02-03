@@ -13,8 +13,12 @@ export class CreateUserService
     @Inject(USER_REPOSITORY) private userRespository: UserRepository,
   ) {}
 
-  async process({ name, email }: CreateUserCommand): Promise<IUserSchema> {
-    const user = new User({ name, email });
+  async process({
+    name,
+    email,
+    code,
+  }: CreateUserCommand): Promise<IUserSchema> {
+    const user = new User({ name, email, code });
 
     await this.userRespository.persist(user);
 

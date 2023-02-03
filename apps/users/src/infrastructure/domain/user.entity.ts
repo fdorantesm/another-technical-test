@@ -22,4 +22,13 @@ export class UserEntity extends BaseEntity implements IUserSchema {
     nullable: true,
   })
   email: string;
+
+  @Column({
+    name: 'code',
+    type: 'varchar',
+    length: 6,
+    nullable: true,
+    unique: true,
+  })
+  code?: string;
 }
