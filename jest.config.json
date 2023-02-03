@@ -48,6 +48,8 @@
     "<rootDir>/node_modules/"
   ],
   "moduleNameMapper": {
+    "^src/(.*)": "<rootDir>/src/$1",
+    "^@app/config(|/.*)$": "<rootDir>/libs/config/src/$1",
     "^@app/commons(|/.*)$": "<rootDir>/libs/commons/src/$1"
   },
   "coveragePathIgnorePatterns": [
